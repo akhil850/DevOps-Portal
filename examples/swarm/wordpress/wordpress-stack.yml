@@ -1,0 +1,51 @@
+version: '3'
+
+networks:
+  traefik-net:
+  livewarewiki_com-network:
+
+services:
+# LB
+  traefik:
+    image: traefik:v1.1.0-rc1
+    command: |-
+      --docker
+      --docker.swarmmode
+      --docker.domain="swarm.livewarewiki.com"
+      --docker.watch
+      --web
+    ports:
+      - 80:80
+    networks:
+      - traefik-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+# Wordpress Area
+  wordpress:
+    image: wordpress:php7.4-apache
+    ports:
+      - 8001:80
+    networks:
+      - livewarewiki_com-network
+      - traefik-net
+    volumes:
+      - /data/livewarewiki_com-wordpress:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: database-1.cfjhh4ywvkvc.ap-south-1.rds.amazonaws.com:3306
+      WORDPRESS_DB_USER: admin
+      WORDPRESS_DB_PASSWORD: zHAHmtXbYhUNiZoAdUjE
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_TABLE_PREFIX: wp_
+    deploy:
+      mode: global #replicas becomes 3 as we have 3 nodes in the swarm
+      labels:
+        APP: WORDPRESS
+        traefik.port: 80
+        traefik.frontend.rule: "Host:swarm.livewarewiki.com,www.swarm.livewarewiki.com"
+        traefik.backend.loadbalancer.sticky: "true" #For sticky sessions
+      restart_policy:
+        condition: on-failure
