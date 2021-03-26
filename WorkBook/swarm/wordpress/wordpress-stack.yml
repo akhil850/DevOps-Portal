@@ -2,7 +2,7 @@ version: '3'
 
 networks:
   traefik-net:
-  livewarewiki_com-network:
+  example_com-network:
 
 services:
 # LB
@@ -11,7 +11,7 @@ services:
     command: |-
       --docker
       --docker.swarmmode
-      --docker.domain="swarm.livewarewiki.com"
+      --docker.domain="swarm.example.com"
       --docker.watch
       --web
     ports:
@@ -30,14 +30,14 @@ services:
     ports:
       - 8001:80
     networks:
-      - livewarewiki_com-network
+      - example_com-network
       - traefik-net
     volumes:
-      - /data/livewarewiki_com-wordpress:/var/www/html
+      - /data/example_com-wordpress:/var/www/html
     environment:
-      WORDPRESS_DB_HOST: database-1.cfjhh4ywvkvc.ap-south-1.rds.amazonaws.com:3306
+      WORDPRESS_DB_HOST: HOSTNAME:3306
       WORDPRESS_DB_USER: admin
-      WORDPRESS_DB_PASSWORD: zHAHmtXbYhUNiZoAdUjE
+      WORDPRESS_DB_PASSWORD: PASSWORD
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_TABLE_PREFIX: wp_
     deploy:
@@ -45,7 +45,7 @@ services:
       labels:
         APP: WORDPRESS
         traefik.port: 80
-        traefik.frontend.rule: "Host:swarm.livewarewiki.com,www.swarm.livewarewiki.com"
+        traefik.frontend.rule: "Host:swarm.example.com,www.swarm.example.com"
         traefik.backend.loadbalancer.sticky: "true" #For sticky sessions
       restart_policy:
         condition: on-failure
