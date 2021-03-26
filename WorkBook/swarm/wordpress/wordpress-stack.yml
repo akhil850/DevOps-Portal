@@ -45,7 +45,7 @@ services:
       labels:
         APP: WORDPRESS
         traefik.port: 80
-        traefik.frontend.rule: "Host:swarm.example.com,www.swarm.example.com" #Change Here
+        traefik.frontend.rule: "Host:swarm.example.com,www.swarm.example.com"
         traefik.backend.loadbalancer.sticky: "true" #For sticky sessions
       restart_policy:
         condition: on-failure
