@@ -33,7 +33,7 @@ services:
       - example_com-network
       - traefik-net
     volumes:
-      - /data/example_com-wordpress:/var/www/html
+      - /data/example_com-wordpress:/var/www/html #GlusterFS
     environment:
       WORDPRESS_DB_HOST: HOSTNAME:3306
       WORDPRESS_DB_USER: admin
@@ -41,11 +41,11 @@ services:
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_TABLE_PREFIX: wp_
     deploy:
-      mode: global #replicas becomes 3 as we have 3 nodes in the swarm
+      mode: global #replicas becomes 3 as we have a total of 3 nodes in the swarm
       labels:
         APP: WORDPRESS
         traefik.port: 80
-        traefik.frontend.rule: "Host:swarm.example.com,www.swarm.example.com"
+        traefik.frontend.rule: "Host:swarm.example.com,www.swarm.example.com" #Change Here
         traefik.backend.loadbalancer.sticky: "true" #For sticky sessions
       restart_policy:
         condition: on-failure
