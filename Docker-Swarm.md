@@ -2,7 +2,7 @@ Docker-Swarm
 
 # Docker-Swarm
 
-![26883bceac1136e93f03ea97b0efdabf.png](../_resources/f9c7aa063789431a94fcf00004e1b350.png)
+![26883bceac1136e93f03ea97b0efdabf.png](./_resources/f9c7aa063789431a94fcf00004e1b350.png)
 
 Docker Swarm is nothing but multiple Docker hosts which run in swarm mode and act as managersand workers. 
 
@@ -228,7 +228,7 @@ $ docker service create \
 ## Sample Deployment - Wordpress with 3 Replica!
 
 
-![f48f13e2522c85b02c5a6653a96970e8.png](../_resources/0808eb6afeb84e74820559434be12e8d.png)
+![f48f13e2522c85b02c5a6653a96970e8.png](./_resources/0808eb6afeb84e74820559434be12e8d.png)
 
 In this demo deployment we are using the following.
 
@@ -338,7 +338,7 @@ node2:/livewarewiki_com-wordpress       /data/livewarewiki_com-wordpress       g
 $ docker stack deploy --compose-file=stack.yml WP_Stack_wordpress
 ```
 
-![503f5f014c97d16020a192cf49f1e74f.png](../_resources/a430d03d52a245cab2addce4ef6dcebf.png)
+![503f5f014c97d16020a192cf49f1e74f.png](./_resources/a430d03d52a245cab2addce4ef6dcebf.png)
 
 stack.yml
 * * *
@@ -406,8 +406,8 @@ services:
 docker service ls
 
 ```
-![2d08c010c9020d35f492302adbc5b7a0.png](../_resources/4bcad657bf5042dfb4fa857ef92f8386.png)
-![aacf1254dc2f78113a659c850b96910c.png](../_resources/c995c93fb5574538a9a3d230e8b8883e.png)
+![2d08c010c9020d35f492302adbc5b7a0.png](./_resources/4bcad657bf5042dfb4fa857ef92f8386.png)
+![aacf1254dc2f78113a659c850b96910c.png](./_resources/c995c93fb5574538a9a3d230e8b8883e.png)
 
 ### Testing site.
 
@@ -424,7 +424,7 @@ Set-Cookie: _TRAEFIK_BACKEND=http://10.0.11.2:80
 X-Powered-By: PHP/7.4.16
 ```
 
-![9cd15bd1e7c5802957536247efbf19bd.png](../_resources/e95fc9e4d94a435baf82677e14326a4b.png)
+![9cd15bd1e7c5802957536247efbf19bd.png](./_resources/e95fc9e4d94a435baf82677e14326a4b.png)
 
 * * *
 * * *
